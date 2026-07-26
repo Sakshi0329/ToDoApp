@@ -12,7 +12,16 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // MIDDLEWARE
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://todoapp-frontend-d72s.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // DB
