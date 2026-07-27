@@ -162,39 +162,73 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        {open && (
-          <div
-            className={`md:hidden flex flex-col py-4 gap-4 border-t transition-all ${
-              theme === "light"
-                ? "bg-white border-gray-200 text-gray-700"
-                : "bg-gray-900 border-gray-700 text-white"
-            }`}
-          >
-            <Link
-              to="/"
-              onClick={() => setOpen(false)}
-              className="hover:text-teal-200"
-            >
-              Dashboard
-            </Link>
+       {/* Mobile Menu */}
+{open && (
+  <div
+    className={`md:hidden flex flex-col py-4 gap-2 border-t transition-all ${
+      theme === "light"
+        ? "bg-white border-gray-200 text-gray-700"
+        : "bg-gray-900 border-gray-700 text-white"
+    }`}
+  >
+    {!user ? (
+      <>
+        <Link
+          to="/login"
+          onClick={() => setOpen(false)}
+          className="px-2 py-2 hover:text-teal-500"
+        >
+          Login
+        </Link>
 
-            <Link
-              to="/login"
-              onClick={() => setOpen(false)}
-              className="hover:text-teal-200"
-            >
-              Login
-            </Link>
+        {/* Uncomment if you want Signup */}
+        {/* 
+        <Link
+          to="/signup"
+          onClick={() => setOpen(false)}
+          className="px-2 py-2 hover:text-teal-500"
+        >
+          Sign Up
+        </Link>
+        */}
+      </>
+    ) : (
+      <>
+        <div
+          className={`px-2 py-2 border-b ${
+            theme === "dark"
+              ? "border-gray-700 text-white"
+              : "border-gray-200 text-gray-800"
+          }`}
+        >
+          <p className="font-semibold">{user.name}</p>
+          <p className="text-xs opacity-70">{user.email}</p>
+        </div>
 
-            <Link
-              to="/signup"
-              onClick={() => setOpen(false)}
-              className="hover:text-teal-200"
-            >
-              Sign Up
-            </Link>
-          </div>
-        )}
+        {/* Uncomment if you have Profile page */}
+        {/*
+        <Link
+          to="/profile"
+          onClick={() => setOpen(false)}
+          className="px-2 py-2 hover:text-teal-500"
+        >
+          Profile
+        </Link>
+        */}
+
+        <button
+          onClick={() => {
+            handleLogout();
+            setOpen(false);
+          }}
+          className="text-left px-2 py-2 text-red-500 hover:text-red-600"
+        >
+          Logout
+        </button>
+      </>
+    )}
+  </div>
+)}
       </div>
     </nav>
   );
